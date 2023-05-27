@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: Kafka
+spec:
+  destination:
+    name: ''
+    namespace: kafka
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: KafkaConfig
+    repoURL: 'https://github.com/Adam1Golden/BigData.git'
+    targetRevision: HEAD
+    directory:
+      recurse: false
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
