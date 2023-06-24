@@ -1,0 +1,35 @@
+apiVersion: kafka.strimzi.io/v1beta2
+kind: Kafka
+metadata:
+  name: {{ .Values.clusterName }}
+  namespace: {{ .Values.namespace }}
+spec:
+  kafka:
+    replicas: {{ .Values.kafka.replicas }}
+    storage:
+      type: {{ .Values.kafka.storage.type}}
+    {{ if eq .Values.kafka.storage.type "persistent-claim" }}
+        size: {{ .Values.kafka.storage.size }}
+        deleteClaim: {{ .Values.kafka.storage.deleteClaim }}
+    {{ else if eq .Values.kafka.storage.type "jbod"}}
+      volumes:
+      {{- range $v := .Values.kafka.storage.volumes }}
+        - id: {{ $v.volid }}
+          type: {{ $v.type }}
+          size: {{ $v.size }}
+          deleteClaim: {{ $v.deleteClaim }}
+      {{ end }}
+    {{ end }}
+    listeners:
+      - name: plain
+        type: internal
+        tls: false
+        port: 9092
+      - name: tls
+        type: internal
+        tls: true
+        port: 9093
+  zookeeper:
+    replicas: 3
+    storage:
+      type: ephemeral
