@@ -9,8 +9,8 @@ spec:
     storage:
       type: {{ .Values.kafka.storage.type}}
     {{ if eq .Values.kafka.storage.type "persistent-claim" }}
-        size: {{ .Values.kafka.storage.size }}
-        deleteClaim: {{ .Values.kafka.storage.deleteClaim }}
+      size: {{ .Values.kafka.storage.size }}
+      deleteClaim: {{ .Values.kafka.storage.deleteClaim }}
     {{ else if eq .Values.kafka.storage.type "jbod"}}
       volumes:
       {{- range $v := .Values.kafka.storage.volumes }}
@@ -20,6 +20,13 @@ spec:
           deleteClaim: {{ $v.deleteClaim }}
       {{ end }}
     {{ end }}
+    resources:
+      requests:
+        memory: 3Gi
+        cpu: 1
+      limits:
+        memory: 5Gi
+        cpu: 2
     listeners:
       - name: plain
         type: internal
@@ -29,7 +36,41 @@ spec:
         type: internal
         tls: true
         port: 9093
+      - name: external
+        type: loadbalancer
+        tls: false
+        port: 9094
+  
   zookeeper:
     replicas: 3
     storage:
-      type: ephemeral
+      type: {{ .Values.zookeeper.storage.type}}
+      {{ if eq .Values.zookeeper.storage.type "persistent-claim" }}
+      size: {{ .Values.zookeeper.storage.size }}
+      deleteClaim: {{ .Values.zookeeper.storage.deleteClaim }}
+      {{ end }}
+    resources:
+      requests:
+        memory: 3Gi
+        cpu: 1
+      limits:
+        memory: 5Gi
+        cpu: 2
+
+  entityOperator:
+    topicOperator: 
+      resources:
+        requests:
+          memory: 3Gi
+          cpu: 1
+        limits:
+          memory: 5Gi
+          cpu: 2
+    userOperator:
+      resources:
+        requests:
+          memory: 3Gi
+          cpu: 1
+        limits:
+          memory: 5Gi
+          cpu: 2
