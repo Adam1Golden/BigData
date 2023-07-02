@@ -1,6 +1,6 @@
 # // Cluster configs
 namespace: kafkatst2
-clusterName: sec-cluster8
+clusterName: cluster2kf
 
 # // Kafka configuration
 kafka:

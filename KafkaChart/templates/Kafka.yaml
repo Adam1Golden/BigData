@@ -37,7 +37,7 @@ spec:
         tls: true
         port: 9093
       - name: external
-        type: loadbalancer
+        type: load-balancer
         tls: false
         port: 9094
   
