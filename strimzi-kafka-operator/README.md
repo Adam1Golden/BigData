@@ -217,6 +217,7 @@ the documentation for more details.
 | `dashboards.extraLabels`             | Any additional labels you would like on the dashboards | `{}`                                    |
 | `dashboards.namespace`               | What namespace should the dashboards be loaded into | `Follows toplevel Namespace`               |
 | `dashboards.annotations`             | Any custom annotations (such as folder for the sidecar) | `{}`                                   |
+| `egress.ports`                        | Port to open from namespace in the egress network policy | `ports 2181, 9090, 9091 9092, 9093`
 
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`. For example,
 
