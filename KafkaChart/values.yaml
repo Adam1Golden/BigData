@@ -28,5 +28,7 @@ zookeeper:
 topics:
   - name: testhelm
     replicas: 3
+    partitions: 3
   - name: helm2u
     replicas: 1
+    partitions: 3
