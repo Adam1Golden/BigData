@@ -67,10 +67,11 @@ kafka:
 | `zookeeper.externalPort` | external port - exposing the brokers with load balancer. | 9094 | int |
 
 ## Topics
-* The topics are stored as an array.
-* In order to add/delete topic add/delete it to/from the array and upgrade your helm repo.
 | Parameter | Description | Default | Type |
 | --------- | ----------- | ------- | ---- |
 | `topic.name` | name of the topic | nil | string |
 | `topic.partitions` | partitions amount fot the topics | nil | int |
 | `topics.replicas` | replicas amount fot the topics | nil | int |
+
+* The topics are stored as an array.
+* In order to add/delete topic add/delete it to/from the array and upgrade your helm repo.
