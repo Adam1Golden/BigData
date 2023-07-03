@@ -5,5 +5,5 @@ The operator helm template is the same as the original strimzi, with added egres
 
 ## Kafka Deployments
 The kafka includes:
-    1. kafka cluster ( include the zookeeper cluster)
-    2. topics
+ >   1. kafka cluster ( include the zookeeper cluster)
+ >   2. topics
