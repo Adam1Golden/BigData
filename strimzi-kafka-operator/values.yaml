@@ -165,3 +165,16 @@ labelsExclusionPattern: ""
 generateNetworkPolicy: true
 # Override the value for Connect build timeout
 connectBuildTimeoutMs: 300000
+
+egress:
+  ports:
+    - protocol: TCP
+      port: 2181
+    - protocol: TCP
+      port: 9090
+    - protocol: TCP
+      port: 9091
+    - protocol: TCP
+      port: 9092
+    - protocol: TCP
+      port: 9093

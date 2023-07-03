@@ -6,15 +6,9 @@ spec:
   podSelector: {}
   egress:
     - ports:
-        - protocol: TCP
-          port: 2181
-        - protocol: TCP
-          port: 9090
-        - protocol: TCP
-          port: 9091
-        - protocol: TCP
-          port: 9092
-        - protocol: TCP
-          port: 9093
+        {{- range $port := .Values.egress.ports}}
+        - protocol: {{ $port.protocol }}
+          port: {{ $port.port }}
+        {{ end }}
   policyTypes:
     - Egress
