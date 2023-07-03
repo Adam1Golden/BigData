@@ -13,11 +13,11 @@ spec:
       deleteClaim: {{ .Values.kafka.storage.deleteClaim }}
     {{ else if eq .Values.kafka.storage.type "jbod"}}
       volumes:
-      {{- range $v := .Values.kafka.storage.volumes }}
-        - id: {{ $v.volid }}
-          type: {{ $v.type }}
-          size: {{ $v.size }}
-          deleteClaim: {{ $v.deleteClaim }}
+      {{ range $i := until (int .Values.kafka.replicas) }}
+        - id: {{ . }}
+          type: {{ $.Values.kafka.storage.volume.type }}
+          size: {{ $.Values.kafka.storage.volume.size }}
+          deleteClaim: {{ $.Values.kafka.storage.volume.deleteClaim }}
       {{ end }}
     {{ end }}
     resources:
@@ -28,18 +28,18 @@ spec:
         memory: 5Gi
         cpu: 2
     listeners:
-      - name: plain
-        type: internal
+      - name: "plain"
+        type: "internal"
         tls: false
         port: 9092
-      - name: tls
-        type: internal
+      - name: "tls"
+        type: "internal"
         tls: true
         port: 9093
-      - name: external
-        type: load-balancer
+      - name: "external"
+        type: "loadbalancer"
         tls: false
-        port: 9094
+        port: {{ .Values.kafka.externalPort }}
   
   zookeeper:
     replicas: 3

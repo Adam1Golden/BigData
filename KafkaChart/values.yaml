@@ -1,36 +1,29 @@
 # // Cluster configs
-namespace: kafkatst2
-clusterName: cluster2kf
+namespace: kafka2
+clusterName: admtsti
 
 # // Kafka configuration
 kafka:
   replicas: 3
-  # // All storage types - Ephemeral, Persistent, JBOD
+  # // All storage types - Ephemeral, Persistent, JBOD(recommended for production).
   # // Read more about storage at - https://strimzi.io/docs/operators/latest/configuring.html#considerations-for-data-storage-str
   storage:
-  #   // example for persistent-claim
+  # // Example for persistent-claim
   #   type: persistent-claim
   #   size: 1Gi
   #   deleteClaim: fasle
+  # // For jbod, this configuration are for all replicas
     type: jbod
-    volumes:
-      - volid: 1
-        type: persistent-claim
-        size: 2Gi
-        deleteClaim: false
-      - volid: 2
-        type: persistent-claim
-        size: 2Gi
-        deleteClaim: false
-      - volid: 3
-        type: persistent-claim
-        size: 2Gi
-        deleteClaim: false
+    volume:
+      type: persistent-claim
+      size: 2Gi
+      deleteClaim: false
+  # // External load balancer port
+  externalPort: 9094
         
 zookeeper:
    replicas: 3
-   # All storage types - Ephemeral, Persistent, JBOD
-   # Read more about storage at - https://strimzi.io/docs/operators/latest/configuring.html#considerations-for-data-storage-str
+   # // Jbod isnt supported for zookeeper
    storage:
      type: persistent-claim
      size: 2Gi
