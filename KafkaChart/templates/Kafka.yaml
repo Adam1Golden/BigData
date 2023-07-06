@@ -22,11 +22,11 @@ spec:
     {{ end }}
     resources:
       requests:
-        memory: {{ .Values.kafka.resources.requests.memory }}
-        cpu: {{ .Values.kafka.resources.requests.cpu }}
+        memory: {{ .Values.kafka.resources.requests.memory | default "3Gi" | quote }}
+        cpu: {{ .Values.kafka.resources.requests.cpu | default 1 | int }}
       limits:
-         memory: {{ .Values.kafka.resources.limits.memory }}
-         cpu: {{ .Values.kafka.resources.limits.cpu }}
+         memory: {{ .Values.kafka.resources.limits.memory | default "5Gi" | quote }}
+         cpu: {{ .Values.kafka.resources.limits.cpu | default 2 | int }}
     listeners:
       - name: "plain"
         type: "internal"
@@ -51,11 +51,11 @@ spec:
       {{ end }} 
     resources:
       requests:
-        memory: {{ .Values.zookeeper.resources.requests.memory }}
-        cpu: {{ .Values.zookeeper.resources.requests.cpu }}
+        memory: {{ .Values.zookeeper.resources.requests.memory | default "3Gi" | quote }}
+        cpu: {{ .Values.zookeeper.resources.requests.cpu | default 1 | int }}
       limits:
-         memory: {{ .Values.zookeeper.resources.limits.memory }}
-         cpu: {{ .Values.zookeeper.resources.limits.cpu }}
+         memory: {{ .Values.zookeeper.resources.limits.memory | default "5Gi" | quote }}
+         cpu: {{ .Values.zookeeper.resources.limits.cpu | default 2 | int }}
 
 entityOperator:
   topicOperator:
