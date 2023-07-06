@@ -1,6 +1,6 @@
 # // Cluster configs
 namespace: kafkatst2
-clusterName: final1
+clusterName: tst2
 
 # // Kafka configuration
 kafka:
@@ -14,16 +14,32 @@ kafka:
       type: persistent-claim
       size: 2Gi
       deleteClaim: false
+  # // For each kafka broker
+  resources:
+    requests:
+      memory: 3Gi
+      cpu: 1
+    limits:
+      memory: 5Gi
+      cpu: 2
   # // External load balancer port
   externalPort: 9094
         
-zookeeper:
-   replicas: 3
+zookeeper: 
+  replicas: 3
    # // Jbod is not supported for zookeeper
-   storage:
+  storage:
      type: persistent-claim
      size: 2Gi
      deleteClaim: false
+  # // For each zookeeper replica
+  resources:
+    requests:
+      memory: 3Gi
+      cpu: 1
+    limits:
+      memory: 5Gi
+      cpu: 2
 
 topics:
   - name: testhelm
