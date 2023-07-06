@@ -11,6 +11,11 @@
 | `kafka.replicas` | amount of kafka brokers | int |
 | `kafka.storage.type` | storage type - Ephemeral, Persistent, JBOD | jbod | string |
 | `kafka.externalPort` | external port - exposing the brokers with load balancer. | 9094 | int |
+| `kafka.resources.requests.memory` | memomry for each kafka broker | 3Gi | string |
+| `kafka.resources.requests.cpu` | cpu for each kafka broker | 1 | int |
+| `kafka.resources.limits.memory` | memomry for each kafka broker | 5Gi | string |
+| `kafka.resources.limits.cpu` | cpu for each kafka broker | 2 | int |
+
 ### Storage configurations
 #### ephemeral
 ```
@@ -61,10 +66,14 @@ kafka:
 | Parameter | Description | Default | Type |
 | --------- | ----------- | ------- | ---- |
 | `zookeeper.replicas` | amount of kafka brokers | int |
-| `zookeeper.storage.type` | storage type - Ephemeral, Persistent, JBOD | jbod | string |
+| `zookeeper.storage.type` | storage type - Ephemeral, Persistent, JBOD | persistent-claim | string |
 | `zookeeper.storage.size` | storage size | 2Gi | string |
 | `zookeeper.storage.volume.deleteClaim` | boolean. determine to delete the storage after deleting cluster | false | string |
-| `zookeeper.externalPort` | external port - exposing the brokers with load balancer. | 9094 | int |
+| `zookeeper.resources.requests.memory` | memomry for each kafka broker | 3Gi | string |
+| `zookeeper.resources.requests.cpu` | cpu for each kafka broker | 1 | int |
+| `zookeeper.resources.limits.memory` | memomry for each kafka broker | 5Gi | string |
+| `zookeeper.resources.limits.cpu` | cpu for each kafka broker | 2 | int |
+
 
 ## Topics
 | Parameter | Description | Default | Type |
