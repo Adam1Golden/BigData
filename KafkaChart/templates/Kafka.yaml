@@ -27,19 +27,13 @@ spec:
       limits:
          memory: {{ .Values.kafka.resources.limits.memory | default "5Gi" | quote }}
          cpu: {{ .Values.kafka.resources.limits.cpu | default 2 | int }}
-    listeners:
-      - name: "plain"
-        type: "internal"
-        tls: false
-        port: 9092
-      - name: "tls"
-        type: "internal"
-        tls: true
-        port: 9093
-      - name: "external"
-        type: "loadbalancer"
-        tls: false
-        port: {{ .Values.kafka.externalPort }}
+    listeners:  
+      {{ range $listener := .Values.kafka.listeners }}
+      - name: {{ $listener.name }}
+        type: {{ $listener.type }}
+        tls: {{ $listener.tls }}
+        port: {{ $listener.port }}
+      {{ end }}
   
   zookeeper:
     replicas: 3

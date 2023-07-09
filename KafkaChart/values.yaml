@@ -22,8 +22,20 @@ kafka:
     limits:
       memory: 5Gi
       cpu: 2
-  # // External load balancer port
-  externalPort: 9094
+  # // Listeners
+  listeners:
+    - name: "plain"
+      type: "internal"
+      tls: false
+      port: 9092
+    - name: "tls"
+      type: "internal"
+      tls: true
+      port: 9093
+    - name: "external"
+      type: "loadbalancer"
+      tls: false
+      port: 9094
         
 zookeeper: 
   replicas: 3
@@ -35,7 +47,7 @@ zookeeper:
   # // For each zookeeper replica
   resources:
     requests:
-      memory: 3Gi
+      memory: 10Gi
       cpu: 1
     limits:
       memory: 5Gi
