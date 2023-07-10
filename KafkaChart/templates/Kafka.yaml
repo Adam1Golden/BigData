@@ -51,20 +51,20 @@ spec:
          memory: {{ .Values.zookeeper.resources.limits.memory | default "5Gi" | quote }}
          cpu: {{ .Values.zookeeper.resources.limits.cpu | default 2 | int }}
 
-entityOperator:
-  topicOperator:
-    resources:
-      requests:
-        memory: {{ .Values.entityOperator | default "3Gi" | quote }}
-        cpu: {{ .Values.entityOperator | default 1 | int }}
-      limits:
-        memory: {{ .Values.entityOperator | default "5Gi" | quote }}
-        cpu: {{ .Values.entityOperator | default 2 | int }}
-  userOperator:
-    resources:
-      requests:
-        memory: {{ .Values.entityOperator | default "3Gi" | quote }}
-        cpu: {{ .Values.entityOperator | default 1 | int }}
-      limits:
-        memory: {{ .Values.entityOperator | default "5Gi" | quote }}
-        cpu: {{ .Values.entityOperator | default 2 | int }}
+  entityOperator:
+    topicOperator:
+      resources:
+        requests:
+          memory: {{ .Values.entityOperator | default "3Gi" | quote }}
+          cpu: {{ .Values.entityOperator | default 1 | int }}
+        limits:
+          memory: {{ .Values.entityOperator | default "5Gi" | quote }}
+          cpu: {{ .Values.entityOperator | default 2 | int }}
+    userOperator:
+      resources:
+        requests:
+          memory: {{ .Values.entityOperator | default "3Gi" | quote }}
+          cpu: {{ .Values.entityOperator | default 1 | int }}
+        limits:
+          memory: {{ .Values.entityOperator | default "5Gi" | quote }}
+          cpu: {{ .Values.entityOperator | default 2 | int }}
