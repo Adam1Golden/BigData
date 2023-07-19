@@ -1,5 +1,5 @@
 # // Cluster configs
-namespace: kafkatst2
+namespace: kafka2
 clusterName: tst2
 
 # // Kafka configuration
